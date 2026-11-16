@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>AgriMart — System Design Artifacts</title>
+<style>
+  :root { --ivory:#F3F7EC; --ink:#10281A; --forest:#16402A; --mut:#647568; --hair:#DCE5D5; --lime:#9BD84A; }
+  * { box-sizing: border-box; }
+  html { background: var(--ivory); }
+  body {
+    margin: 0 auto; max-width: 1180px; padding: 48px 32px 96px;
+    font-family: "Hanken Grotesk", "Segoe UI", system-ui, sans-serif;
+    color: var(--ink); font-size: 15px; line-height: 1.55;
+  }
+  h1 { font-size: 40px; line-height: 1.05; letter-spacing: -0.02em; margin: 0 0 8px; font-weight: 700; }
+  h2 { font-size: 20px; margin: 56px 0 4px; padding-top: 24px; border-top: 1px solid var(--hair); font-weight: 700; }
+  p.lede { color: var(--mut); max-width: 68ch; margin: 0 0 8px; }
+  .meta { font-size: 12px; color: var(--mut); }
+  figure { margin: 20px 0 0; }
+  figure img { display: block; width: 100%; height: auto; border: 1px solid var(--hair); background: #fff; }
+  figcaption { font-size: 13px; color: var(--mut); margin-top: 10px; }
+  .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 24px; margin-top: 20px; }
+  .grid img { width: 100%; height: auto; border: 1px solid var(--hair); background: #fff; }
+  code { font-family: ui-monospace, Consolas, monospace; font-size: 13px; background: #E4EDD6; padding: 1px 5px; }
+  a { color: var(--forest); }
+  @media print {
+    html, body { background: #fff; }
+    body { max-width: none; padding: 0; font-size: 12px; }
+    h2 { break-before: page; }
+    h2:first-of-type { break-before: auto; }
+    figure, .grid { break-inside: avoid; }
+    a { text-decoration: none; color: inherit; }
+  }
+</style>
+</head>
+<body>
+  <h1>AgriMart — System Design Artifacts</h1>
+  <p class="lede">
+    Use case, entity relationship, context and architecture diagrams plus page wireframes
+    for the AgriMart agricultural supply store. Every figure is also available as an
+    editable SVG and a 2× PNG for embedding in the project documentation.
+  </p>
+  <p class="meta">Web Systems and Technologies 2 · System Integration and Architecture 1 · Print to PDF for the submission pack.</p>
+
+  <h2>1. Use Case Diagram</h2>
+  <figure>
+    <img src="use-case-diagram.svg" alt="Use case diagram: customer, staff, administrator and external services against the AgriMart use cases" />
+    <figcaption>Primary actors (customer, staff, administrator) and secondary actors (PayMongo, Email Server, Google Maps) with their use cases.</figcaption>
+  </figure>
+
+  <h2>2. Entity Relationship Diagram</h2>
+  <figure>
+    <img src="er-diagram.svg" alt="Entity relationship diagram of the AgriMart MySQL schema" />
+    <figcaption>Core tables (roles, users, addresses, categories, products, orders, order_items, payments, inventory_logs) with CMS support tables and 1:M relationships.</figcaption>
+  </figure>
+
+  <h2>3. Context Diagram</h2>
+  <figure>
+    <img src="context-diagram.svg" alt="Context diagram showing the AgriMart system and its external entities" />
+    <figcaption>The system as a single process with the data it exchanges with customers, back-office staff and third-party services.</figcaption>
+  </figure>
+
+  <h2>4. System Architecture</h2>
+  <figure>
+    <img src="architecture-diagram.svg" alt="Three tier architecture of AgriMart" />
+    <figcaption>Three-tier architecture: browser → Next.js front end → REST API + JWT → Strapi CMS → MySQL, with PayMongo, SMTP and Google Maps integrations.</figcaption>
+  </figure>
+
+  <h2>5. Wireframes</h2>
+  <div class="grid">
+    <figure><img src="wireframes/01-home.svg" alt="Home page wireframe" /><figcaption>1. Home</figcaption></figure>
+    <figure><img src="wireframes/02-products.svg" alt="Products page wireframe" /><figcaption>2. Products / shop</figcaption></figure>
+    <figure><img src="wireframes/03-product-detail.svg" alt="Product detail wireframe" /><figcaption>3. Product detail</figcaption></figure>
+    <figure><img src="wireframes/04-cart-checkout.svg" alt="Cart and checkout wireframe" /><figcaption>4. Cart and checkout</figcaption></figure>
+    <figure><img src="wireframes/05-auth.svg" alt="Sign up and login wireframe" /><figcaption>5. Sign up / log in</figcaption></figure>
+    <figure><img src="wireframes/06-account.svg" alt="Account page wireframe" /><figcaption>6. My account</figcaption></figure>
+    <figure><img src="wireframes/07-announcements.svg" alt="Announcements wireframe" /><figcaption>7. Announcements</figcaption></figure>
+    <figure><img src="wireframes/08-contact.svg" alt="Contact and store locator wireframe" /><figcaption>8. Contact / store locator</figcaption></figure>
+    <figure><img src="wireframes/09-admin-dashboard.svg" alt="Admin dashboard wireframe" /><figcaption>9. Admin dashboard (CMS panel)</figcaption></figure>
+  </div>
+
+  <h2>Source and exports</h2>
+  <p class="lede">
+    SVGs live in <code>docs/</code> and <code>docs/wireframes/</code>; 2× PNGs are in <code>docs/png/</code>.
+    Rebuild with <code>node docs/generate-uml.mjs</code>, <code>node docs/generate-wireframes.mjs</code>
+    and <code>node docs/export-png.mjs</code>. See <a href="README.md">docs/README.md</a> for details.
+  </p>
+</body>
+</html>

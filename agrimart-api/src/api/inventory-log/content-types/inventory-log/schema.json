@@ -1,0 +1,40 @@
+{
+  "kind": "collectionType",
+  "collectionName": "inventory_logs",
+  "info": {
+    "singularName": "inventory-log",
+    "pluralName": "inventory-logs",
+    "displayName": "Inventory log"
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "product": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::product.product",
+      "inversedBy": "inventoryLogs"
+    },
+    "changeQty": {
+      "type": "integer",
+      "required": true
+    },
+    "reason": {
+      "type": "enumeration",
+      "enum": [
+        "stock_in",
+        "sale",
+        "adjustment",
+        "spoilage"
+      ],
+      "required": true
+    },
+    "user": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "plugin::users-permissions.user"
+    }
+  }
+}

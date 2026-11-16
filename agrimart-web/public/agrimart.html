@@ -1,0 +1,182 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>AgriMart</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@100,600&family=Hanken+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+/* 1 tokens */
+:root{--canvas:#F3F7EC;--surf:#fff;--zone:#E4EDD6;--ink:#10281A;--mut:#647568;--forest:#16402A;--lime:#9BD84A;--wheat:#E6B43A;--bd:#DCE5D5;--line:#A9B8A3;--red:#C2432F;--deep:#0F2E1C;--okt:#1E6A39;--lot:#8A5A00;--outt:#A8321F;--hd:"Archivo","Arial Narrow",system-ui,sans-serif;--bt:"Hanken Grotesk",system-ui,sans-serif}
+@media(prefers-color-scheme:dark){:root{--canvas:#0C1B12;--surf:#12281B;--zone:#12281B;--ink:#E7F0DA;--mut:#A6B5A2;--forest:#9BD84A;--bd:#294331;--line:#4F6F5A;--red:#F07868;--deep:#0A1710;--okt:#8FD9A3;--lot:#F0C766;--outt:#F5A394}}
+/* 2 base */
+*{box-sizing:border-box;border-radius:0}body{margin:0;background:var(--canvas);color:var(--ink);font:400 16px/1.65 var(--bt)}
+h1,h2,h3{font-family:var(--hd);font-weight:600;letter-spacing:-.03em;line-height:1.1;margin:0}
+h1{font-size:clamp(34px,5vw,56px)}h2{font-size:clamp(24px,3vw,32px)}h3{font-size:16px;line-height:1.3}
+a{color:inherit}p{margin:0}.n,.pr{font-family:var(--hd);font-variant-numeric:tabular-nums;font-weight:600}
+.w{max-width:1280px;margin:0 auto;padding:0 32px}.sec{padding:96px 0}.zone{background:var(--zone)}.mut{color:var(--mut);font-size:14px}
+:focus-visible{outline:2px solid var(--ink);outline-offset:3px}
+.hd2{display:flex;justify-content:space-between;align-items:end;margin-bottom:32px;gap:16px}
+/* 3 header */
+header{position:sticky;top:0;z-index:20;background:var(--canvas);border-bottom:1px solid var(--bd)}
+.hb{display:flex;align-items:center;gap:32px;min-height:64px}.logo{font:600 22px var(--hd);letter-spacing:-.03em;text-decoration:none}
+nav{display:flex;gap:20px;flex:1}nav a,.hl{text-decoration:none;font-size:15px;font-weight:500;padding:8px 0;border-bottom:2px solid transparent;background:none;border-top:0;border-inline:0;color:inherit;cursor:pointer;font-family:inherit;min-height:44px}
+nav a[aria-current=page]{border-color:var(--ink)}.u{border:0;border-bottom:1px solid var(--ink);background:transparent;height:44px;font:inherit;color:inherit;min-width:0}
+.hs{display:flex}.cnt{font-size:12px;font-weight:700;background:var(--ink);color:var(--canvas);padding:1px 6px;margin-left:4px}.cnt.b{animation:bump .25s}
+@keyframes bump{50%{transform:scale(1.4)}}#mb{display:none}
+/* 4 controls */
+.btn{display:inline-flex;align-items:center;justify-content:center;min-height:44px;padding:0 20px;font:600 14px var(--bt);border:1px solid var(--ink);background:transparent;color:var(--ink);cursor:pointer;text-decoration:none;transition:background .15s,color .15s}
+.btn:hover{background:var(--ink);color:var(--canvas)}.btn.p{background:var(--lime);border-color:var(--lime);color:#10281A}.btn.p:hover{background:#B4E56E;color:#10281A}
+.btn.f{background:var(--ink);color:var(--canvas)}.btn.s{padding:0 14px}.btn:disabled{opacity:.35;cursor:not-allowed}.btn:disabled:hover{background:transparent;color:var(--ink)}
+.fld{height:44px;border:1px solid var(--line);background:var(--surf);color:var(--ink);padding:0 12px;font:inherit;width:100%}textarea.fld{height:120px;padding:12px}
+label{display:block;font-size:14px;font-weight:500;margin:16px 0 4px}.err{color:var(--red);font-size:14px;margin-top:12px}
+.lk{background:none;border:0;padding:0;font:inherit;text-decoration:underline;cursor:pointer;color:inherit;min-height:44px}.lk.r{color:var(--red)}
+/* 5 stock and photos */
+.stk{font-size:14px;font-weight:500}.stk.ok{color:var(--okt)}.stk.lo{color:var(--lot)}.stk.out{color:var(--outt)}
+.mt{display:inline-flex;gap:2px}.mt i{width:14px;height:4px;background:var(--bd)}.mt i.on{background:var(--forest)}
+.ph{position:relative;background:var(--t,var(--zone));overflow:hidden;aspect-ratio:var(--r,4/3);display:grid;place-items:end start;color:#10281A}
+.ph:before{content:"";position:absolute;inset:0;background:linear-gradient(to top right,transparent calc(50% - .5px),rgba(16,40,26,.25),transparent calc(50% + .5px)),linear-gradient(to bottom right,transparent calc(50% - .5px),rgba(16,40,26,.25),transparent calc(50% + .5px))}
+.ph span{position:relative;font-size:12px;padding:8px 12px}.ph img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}.ph.has:before,.ph.has span{display:none}
+/* 6 home */
+.hero{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center;padding:80px 0;animation:fu .6s both}@keyframes fu{from{opacity:0;transform:translateY(16px)}}
+.hero p{max-width:52ch;margin:20px 0 28px}.row{display:flex;gap:12px;flex-wrap:wrap;align-items:center}
+.li{display:grid;grid-template-columns:1fr auto auto;gap:24px;align-items:center;padding:14px 0;border-bottom:1px solid var(--bd);text-decoration:none}
+.li:first-child{border-top:1px solid var(--ink)}.li small{display:block;color:var(--mut);font-size:13px}
+.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:56px 24px}.pc{display:flex;flex-direction:column;gap:6px}.pc a{text-decoration:none}.pc a:hover h3{text-decoration:underline}
+.pc .pr{font-size:18px}.pc .pr small{font:400 13px var(--bt);color:var(--mut)}.pc .btn{margin-top:8px}
+.feat{display:grid;grid-template-columns:repeat(4,1fr);gap:56px 24px}.feat .lead{grid:span 2/span 2}.lead h3{font-size:24px}
+.rk{display:grid;grid-template-columns:32px 64px 1fr 160px 90px;gap:16px;align-items:center;padding:12px 0;border-bottom:1px solid var(--bd)}.rk .ph{aspect-ratio:1}
+.bar{height:3px;background:var(--bd);margin-top:4px}.bar i{display:block;height:3px;background:var(--forest)}
+.strip{display:flex;gap:24px;overflow-x:auto;padding-bottom:12px}.strip .pc{min-width:240px}
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:32px}.steps b{font:600 32px var(--hd)}
+.adv{display:grid;grid-template-columns:72px 1fr;gap:20px;padding:20px 0;border-bottom:1px solid var(--bd);max-width:760px}.adv .n{font-size:32px;line-height:1}.adv small{color:var(--mut)}
+.pin{background:var(--wheat);color:#10281A;font-size:12px;font-weight:600;padding:1px 8px;margin-left:8px}
+/* 7 shop and cart */
+.shop{display:grid;grid-template-columns:216px 1fr;gap:48px}.fl button{display:block;background:none;border:0;font:inherit;padding:6px 0;cursor:pointer;color:var(--mut);min-height:36px}.fl button[aria-pressed=true]{color:var(--ink);text-decoration:underline}
+.pg{display:grid;grid-template-columns:1fr 1fr;gap:64px}.gal{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:8px}.gal .ph{aspect-ratio:1}
+.spec{margin:20px 0;border-top:1px solid var(--bd)}.spec div{display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--bd);font-size:14px}
+.cart{display:grid;grid-template-columns:1.3fr 1fr;gap:64px;align-items:start}.ln{display:grid;grid-template-columns:80px 1fr auto;gap:16px;padding:16px 0;border-bottom:1px solid var(--bd);align-items:center}.ln .ph{aspect-ratio:1}
+.ln input{width:72px;height:44px}.rcpt{background:var(--surf);padding:32px;position:sticky;top:88px}.rcpt .t{display:flex;justify-content:space-between;padding:6px 0}.rcpt .tot{border-top:1px solid var(--ink);margin-top:8px;padding-top:12px;font-size:20px}
+.map{width:100%;height:320px;border:1px solid var(--line)}.two{display:grid;grid-template-columns:1fr 1fr;gap:64px}
+/* 8 account */
+.tl{display:flex;list-style:none;padding:0;margin:16px 0;position:relative;justify-content:space-between;max-width:560px}.tl:before{content:"";position:absolute;left:6px;right:6px;top:6px;height:1px;background:var(--line)}
+.tl li{position:relative;font-size:12px;display:flex;flex-direction:column;gap:6px;align-items:center;text-align:center;flex:1}.tl li:before{content:"";width:13px;height:13px;background:var(--canvas);border:1px solid var(--line);z-index:1}
+.tl li.d:before{background:var(--ink);border-color:var(--ink)}.tl li.c:before{border:2px solid var(--ink)}
+.ord{padding:24px 0;border-bottom:1px solid var(--bd)}.tw{overflow-x:auto}
+/* 9 loader and toast */
+#ld{position:fixed;inset:0;background:var(--canvas);z-index:99;display:grid;place-content:center;justify-items:center;gap:12px;pointer-events:none;transition:opacity .3s}
+#ld path{stroke:var(--forest);fill:none;stroke-width:3;stroke-dasharray:80;stroke-dashoffset:80;animation:dr .8s forwards}#ld .l2{animation-delay:.5s}@keyframes dr{to{stroke-dashoffset:0}}
+#ld u{display:block;height:2px;width:160px;background:var(--bd)}#ld u:after{content:"";display:block;height:2px;background:var(--forest);animation:fill 1.7s forwards}@keyframes fill{from{width:0}to{width:100%}}
+#tt{position:fixed;left:50%;bottom:24px;transform:translate(-50%,80px);background:var(--deep);color:#E7F0DA;padding:12px 20px;transition:transform .2s;z-index:50;font-size:14px}#tt.on{transform:translate(-50%,0)}
+footer{background:var(--deep);color:#E7F0DA;padding:64px 0 32px;margin-top:0}footer .fg{display:grid;grid-template-columns:repeat(4,1fr);gap:32px}footer a{display:block;text-decoration:none;font-size:14px;padding:4px 0}
+/* 10 responsive */
+@media(max-width:1199px){.grid{grid-template-columns:repeat(3,1fr)}}
+@media(max-width:991px){.hero,.pg,.cart,.two{grid-template-columns:1fr;gap:40px}.shop{grid-template-columns:1fr}.feat{grid-template-columns:1fr 1fr}.rcpt{position:static}footer .fg{grid-template-columns:1fr 1fr}.sec{padding:80px 0}}
+@media(max-width:767px){.w{padding:0 20px}.sec{padding:64px 0}.grid{grid-template-columns:1fr 1fr}.steps{grid-template-columns:1fr}.rk{grid-template-columns:24px 56px 1fr 80px}.rk .bw{display:none}
+#mb{display:block}.hb{flex-wrap:wrap;gap:8px 16px}.logo{flex:1}nav{display:none;flex-basis:100%;flex-direction:column;gap:0}nav.open{display:flex}.hs{flex-basis:100%;order:5}.hs .u{width:100%}footer .fg{grid-template-columns:1fr}.li{grid-template-columns:1fr auto}.li .mt{display:none}}
+@media(max-width:359px){.grid,.feat{grid-template-columns:1fr}}
+@media(prefers-reduced-motion:reduce){*{animation-duration:.01ms!important;transition-duration:.01ms!important}}
+</style></head><body>
+<div id="ld" aria-hidden="true"><svg width="48" height="48" viewBox="0 0 48 48"><path d="M24 44V20"/><path class="l2" d="M24 28C14 28 10 20 10 12c10 0 14 6 14 16zM24 22C34 22 38 14 38 6 28 6 24 12 24 22z"/></svg><p class="mut">Growing your experience...</p><u></u></div>
+<header><div class="w hb"><a class="logo" href="#home">AgriMart</a><button class="lk" id="mb" aria-expanded="false" aria-controls="nv" onclick="mn()">Menu</button><nav id="nv"></nav>
+<form class="hs" onsubmit="return go(event)" role="search"><input class="u" id="q" aria-label="Search products" placeholder="Search products"></form>
+<a class="hl" href="#account" id="ac">Account</a><a class="hl" href="#cart">Cart<span class="cnt" id="cc" hidden>0</span></a></div></header>
+<main id="app"></main>
+<footer><div class="w"><div class="fg"><div><div class="logo">AgriMart</div><p class="mut" style="color:#A6B5A2;margin-top:8px">Seeds, feed, fertilizer and tools with live stock.</p></div>
+<div><a href="#shop">Shop</a><a href="#categories">Categories</a><a href="#announcements">Announcements</a></div><div><a href="#about">About</a><a href="#contact">Contact</a><a href="#account">My orders</a></div><div><p style="font-size:14px" id="fh"></p></div></div></div></footer>
+<div id="tt" role="status"></div>
+<script>
+/* config */
+const API="http://localhost:1337"; // Strapi base URL
+const IMG={}; // photo slots: {hero:"img/hero.jpg", p1:"img/corn.jpg"}
+const FEE={Victoria:50,Naujan:90,Calapan:130};
+const STORE={addr:"Calapan City, Oriental Mindoro",open:8,close:17,q:"Calapan City Oriental Mindoro"};
+const TINT={Seeds:"#E8F1D6",Fertilizer:"#F4E9C4",Pesticide:"#F4DDD2",Feeds:"#F1E3BE",Veterinary:"#DCEBEE",Tools:"#E7E3DA",Irrigation:"#D8E9F3"};
+const STEPS=["Pending","Paid","Preparing","Out for Delivery","Completed"];
+/* helpers */
+const esc=s=>String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const ld=(k,d)=>{try{return JSON.parse(localStorage.getItem(k))??d}catch{return d}},sv=(k,v)=>{try{localStorage.setItem(k,JSON.stringify(v))}catch{}};
+const peso=n=>"₱"+Number(n).toLocaleString("en-PH"),$=s=>document.querySelector(s);
+let tm;function toast(m){const t=$("#tt");t.textContent=m;t.classList.add("on");clearTimeout(tm);tm=setTimeout(()=>t.classList.remove("on"),3200)}
+const f=x=>x&&x.attributes?{id:x.id,...x.attributes}:x,nm=c=>c&&(c.name||c.data?.attributes?.name||c.attributes?.name||"");
+async function api(p,o={}){const h={"Content-Type":"application/json",...(jwt?{Authorization:"Bearer "+jwt}:{})};const r=await fetch(API+"/api"+p,{headers:h,...o});const j=await r.json().catch(()=>({}));if(!r.ok)throw new Error(j.error?.message||"Request failed");return j}
+/* data */
+let P=[],CAT=[],AN=[],live=false,cart=ld("cart",[]),user=ld("user",null),jwt=ld("jwt",null),S={q:"",cat:"",brand:"",max:"",sort:"rel"},authMode="login";
+function normP(x){x=f(x);const im=x.image,u=im?.url||im?.data?.attributes?.url||(Array.isArray(im)?im[0]?.url:"")||"";
+return{id:x.id,name:x.name,brand:x.brand||"",cat:nm(x.category),unit:x.unit||"each",price:+x.price,stock:+(x.stock_qty??0),re:+(x.reorder_level??5),feat:!!x.is_featured,sold:+(x.sold||0),at:x.createdAt||"",img:u?(u.startsWith("/")?API+u:u):"",d:x.description||""}}
+const normA=x=>{x=f(x);return{id:x.id,t:x.title,b:x.body,pin:!!x.is_pinned,at:x.published_at||x.publishedAt||x.createdAt}};
+function demo(){CAT=Object.keys(TINT);P=[[1,"Hybrid corn seed","Pioneer","Seeds",1850,"50 kg",22,10,64],[2,"Layer mash","Pilmico","Feeds",1120,"50 kg",8,10,90],[3,"Complete 14-14-14","Atlas","Fertilizer",1480,"50 kg",35,12,70],[4,"Hand sprayer 16L","Solo","Tools",950,"each",0,4,12],[5,"Drip tape 1000 m","Netafim","Irrigation",2400,"roll",6,5,18],[6,"Ivermectin 100 ml","Vetoquinol","Veterinary",380,"bottle",40,10,45],[7,"Pechay seed pack","East-West","Seeds",85,"10 g",120,30,150],[8,"Insecticide 1 L","Bayer","Pesticide",640,"bottle",14,8,33]].map(r=>({id:r[0],name:r[1],brand:r[2],cat:r[3],price:r[4],unit:r[5],stock:r[6],re:r[7],sold:r[8],feat:r[0]<6,at:"2026-0"+r[0],img:"",d:"Sold as "+r[5]+". Store-checked stock."}));
+AN=[{id:1,t:"Plant corn before the first heavy rains",b:"Prepare seed beds now. Hybrid corn is in stock.",pin:true,at:"2026-11-02"},{id:2,t:"Free delivery above ₱3,000 in Victoria",b:"Valid through the end of the month.",pin:false,at:"2026-10-28"}]}
+async function boot(){try{const[a,b,c]=await Promise.all([api("/products?populate=*&pagination[pageSize]=100"),api("/categories?pagination[pageSize]=50"),api("/announcements?sort=publishedAt:desc&pagination[pageSize]=20")]);P=a.data.map(normP);CAT=b.data.map(x=>nm(f(x)));AN=c.data.map(normA);live=true}catch(e){demo()}}
+/* components */
+const ph=(k,label,cat,src,r)=>{const s=IMG[k]||src;return`<div class="ph${s?" has":""}" data-k="${k}" style="--t:${TINT[cat]||"var(--zone)"};${r?"--r:"+r:""}">${s?`<img src="${esc(s)}" alt="${esc(label)}" loading="lazy">`:""}<span>${esc(label)}</span></div>`};
+const st=p=>p.stock<=0?`<span class="stk out">✕ Out of stock</span>`:p.stock<=p.re?`<span class="stk lo">! Low stock: ${p.stock} left</span>`:`<span class="stk ok">✓ In stock: ${p.stock}</span>`;
+const mt=p=>{const n=p.stock<=0?0:Math.max(1,Math.min(5,Math.ceil(5*p.stock/(p.re*3||1))));return`<span class="mt" aria-hidden="true">${[1,2,3,4,5].map(i=>`<i class="${i<=n?"on":""}"></i>`).join("")}</span>`};
+const pc=(p,lead)=>`<article class="pc${lead?" lead":""}"><a href="#product/${p.id}">${ph("p"+p.id,p.name,p.cat,p.img,lead?"1/1":"")}<p class="mut" style="margin-top:8px">${esc(p.brand)}</p><h3>${esc(p.name)}</h3></a>${st(p)}<div class="pr">${peso(p.price)} <small>per ${esc(p.unit)}</small></div><button class="btn" ${p.stock<=0?"disabled":""} onclick="add(${p.id})">${p.stock<=0?"Unavailable":"Add to cart"}</button></article>`;
+const dt=a=>{const d=new Date(a);return isNaN(d)?"":`<div class="n">${d.getDate()}</div><small>${d.toLocaleString("en",{month:"short"})}</small>`};
+const adv=a=>`<div class="adv"><div>${dt(a.at)}</div><div><h3>${esc(a.t)}${a.pin?'<span class="pin">Pinned</span>':""}</h3><p class="mut" style="margin-top:4px">${esc(a.b)}</p></div></div>`;
+const isOpen=()=>{const h=new Date().getHours();return h>=STORE.open&&h<STORE.close};
+/* cart and orders */
+const line=()=>cart.map(c=>({...c,p:P.find(p=>p.id===c.id)})).filter(c=>c.p);
+const sub=()=>line().reduce((s,c)=>s+c.p.price*c.qty,0);
+function add(id,q=1){const p=P.find(x=>x.id===id),c=cart.find(x=>x.id===id),n=(c?c.qty:0)+q;if(n>p.stock)return toast(`Only ${p.stock} in stock.`);c?c.qty=n:cart.push({id,qty:q});sv("cart",cart);bar();toast("Item added to cart")}
+function setQ(id,v){const p=P.find(x=>x.id===id);v=Math.max(1,+v||1);if(v>p.stock){toast(`Only ${p.stock} in stock.`);v=p.stock}cart.find(x=>x.id===id).qty=v;sv("cart",cart);route(1)}
+function rm(id){cart=cart.filter(c=>c.id!==id);sv("cart",cart);bar();route(1)}
+async function order(e){e.preventDefault();const g=n=>e.target.elements[n].value,del=g("ft")==="delivery",er=$("#oe");er.textContent="";
+if(!user)return location.hash="#account",toast("Log in to place your order.");
+if(del&&(!g("mun")||!g("brgy")))return er.textContent="Choose a municipality and enter your barangay to deliver.";
+const fee=del?FEE[g("mun")]||0:0,total=sub()+fee;
+try{await api("/orders",{method:"POST",body:JSON.stringify({data:{fulfillment_type:g("ft"),delivery_fee:fee,total_amount:total,status:"Pending",municipality:g("mun"),barangay:g("brgy"),street:g("street"),payment_method:g("pay"),items:line().map(c=>({product:c.id,quantity:c.qty,unit_price:c.p.price}))}})});
+cart=[];sv("cart",cart);bar();toast("Order placed");location.hash="#account"}catch(x){er.textContent=live?x.message+". Check your details and try again.":"Strapi isn’t reachable at "+API+". Start it, then try again."}}
+/* views */
+const V={};
+V.home=()=>{const sh=P.slice(0,6),ft=P.filter(p=>p.feat).slice(0,5),bs=[...P].sort((a,b)=>b.sold-a.sold).slice(0,5),mx=bs[0]?.sold||1,rc=[...P].sort((a,b)=>String(b.at).localeCompare(a.at)).slice(0,8);
+return`<div class="w"><section class="hero"><div><h1>Know it’s in stock before you travel.</h1><p>Seeds, feed, fertilizer and tools from our shelf. Check live counts, order online and pick up or have it delivered.</p><div class="row"><a class="btn p" href="#shop">Shop supplies</a><a class="btn" href="#contact">Find the store</a></div></div>${ph("hero","Hero photo",null,"","4/5")}</section>
+<section class="sec" style="padding-top:0"><div class="hd2"><h2>Today’s shelf</h2><span class="mut">Updated ${new Date().toLocaleTimeString("en",{hour:"numeric",minute:"2-digit"})}</span></div>${sh.map(p=>`<a class="li" href="#product/${p.id}"><span>${esc(p.name)}<small>${esc(p.brand)}</small></span>${mt(p)}<span class="stk ${p.stock<=0?"out":p.stock<=p.re?"lo":"ok"} n">${p.stock}</span></a>`).join("")}</section></div>
+<section class="sec zone"><div class="w"><div class="hd2"><h2>Shop by category</h2></div>${CAT.map(c=>`<a class="li" href="#shop" onclick="S.cat='${esc(c)}'"><span>${esc(c)}</span><span></span><span class="mut n">${P.filter(p=>p.cat===c).length} items</span></a>`).join("")}</div></section>
+<section class="sec w"><div class="hd2"><h2>Featured products</h2><a href="#shop">See all</a></div><div class="feat">${ft.map((p,i)=>pc(p,i===0)).join("")}</div></section>
+<section class="sec w" style="padding-top:0"><div class="hd2"><h2>Best sellers</h2></div>${bs.map((p,i)=>`<div class="rk"><span class="n">${i+1}</span>${ph("p"+p.id,p.name,p.cat,p.img,"1/1")}<a href="#product/${p.id}"><h3>${esc(p.name)}</h3><span class="mut">${esc(p.brand)}</span></a><div class="bw"><span class="mut">${p.sold} sold</span><div class="bar"><i style="width:${p.sold/mx*100}%"></i></div></div><span class="pr">${peso(p.price)}</span></div>`).join("")}</section>
+<section class="sec w" style="padding-top:0"><div class="hd2"><h2>Recently added</h2></div><div class="strip">${rc.map(p=>pc(p)).join("")}</div></section>
+<section class="sec zone"><div class="w"><h2>AgriMart Plus</h2><p style="max-width:52ch;margin:16px 0 24px">Bulk-price discounts and free delivery above a set amount. Ask at the store to join.</p><a class="btn f" href="#contact">Ask about Plus</a></div></section>
+<section class="sec w"><div class="hd2"><h2>How to order</h2></div><div class="steps"><div><b>1</b><h3>Pick your supplies</h3><p class="mut">Check the stock count, then add to cart.</p></div><div><b>2</b><h3>Choose delivery or pickup</h3><p class="mut">Delivery fees depend on your municipality.</p></div><div><b>3</b><h3>Pay and track</h3><p class="mut">Pay online or cash on delivery, then follow your order.</p></div></div></section>
+<section class="sec w" style="padding-top:0"><div class="hd2"><h2>Advisories and seasonal tips</h2><a href="#announcements">All announcements</a></div>${[...AN].sort((a,b)=>b.pin-a.pin).slice(0,3).map(adv).join("")||'<p class="mut">No announcements available right now.</p>'}</section>
+<section class="sec zone"><div class="w two"><div><h2>Visit the store</h2><p style="margin-top:16px">${STORE.addr}<br>Open daily, ${STORE.open}:00 to ${STORE.close-12}:00 pm</p><p class="n" style="margin:12px 0 24px">${isOpen()?"Open now":"Closed now"}</p><a class="btn f" href="#contact">Get directions</a></div></div></section>`};
+V.shop=()=>{const br=[...new Set(P.map(p=>p.brand).filter(Boolean))];return`<div class="w" style="padding-top:64px;padding-bottom:96px"><h1 style="font-size:clamp(32px,4vw,40px)">Shop</h1><p class="mut" style="margin:8px 0 32px;max-width:52ch">Every item shows its live stock count.</p>
+<form class="row" onsubmit="S.q=this.sq.value;route(1);return false"><input class="fld" name="sq" value="${esc(S.q)}" aria-label="Search products" style="max-width:360px"><button class="btn f">Search</button><label for="so" style="margin:0 0 0 auto">Sort</label><select id="so" class="fld" style="width:auto" onchange="S.sort=this.value;route(1)">${[["rel","Relevance"],["lo","Price low to high"],["hi","Price high to low"],["new","Newest"]].map(o=>`<option value="${o[0]}" ${S.sort===o[0]?"selected":""}>${o[1]}</option>`).join("")}</select></form>
+<div class="shop" style="margin-top:32px"><details class="fl" ${innerWidth>991?"open":""}><summary style="cursor:pointer;min-height:44px">Filters</summary><h3 style="margin-top:12px">Category</h3>${["",...CAT].map(c=>`<button aria-pressed="${S.cat===c}" onclick="S.cat='${esc(c)}';route(1)">${c||"All"}</button>`).join("")}<label for="mx">Max price</label><select id="mx" class="fld" onchange="S.max=this.value;route(1)">${[["","Any"],["200","₱200"],["1000","₱1,000"],["2000","₱2,000"]].map(o=>`<option value="${o[0]}" ${S.max===o[0]?"selected":""}>${o[1]}</option>`).join("")}</select><label for="bs">Brand</label><select id="bs" class="fld" onchange="S.brand=this.value;route(1)"><option value="">Any</option>${br.map(b=>`<option ${S.brand===b?"selected":""}>${esc(b)}</option>`).join("")}</select><p><button class="lk" onclick="S={q:'',cat:'',brand:'',max:'',sort:'rel'};route(1)">Clear filters</button></p></details>
+<div>${(()=>{let r=P.filter(p=>(!S.q||(p.name+p.brand+p.cat).toLowerCase().includes(S.q.toLowerCase()))&&(!S.cat||p.cat===S.cat)&&(!S.brand||p.brand===S.brand)&&(!S.max||p.price<=+S.max));if(S.sort==="lo")r.sort((a,b)=>a.price-b.price);if(S.sort==="hi")r.sort((a,b)=>b.price-a.price);if(S.sort==="new")r.sort((a,b)=>String(b.at).localeCompare(a.at));return`<p class="mut" aria-live="polite" style="margin-bottom:24px">${r.length} products</p>`+(r.length?`<div class="grid" style="grid-template-columns:repeat(auto-fill,minmax(200px,1fr))">${r.map(p=>pc(p)).join("")}</div>`:'<p>No products found. Try another search or category.</p>')})()}</div></div></div>`};
+V.product=id=>{const p=P.find(x=>x.id==id);if(!p)return V.nf();const rel=P.filter(x=>x.cat===p.cat&&x.id!==p.id).slice(0,4);
+return`<div class="w" style="padding-top:48px;padding-bottom:96px"><p class="mut"><a href="#shop">Shop</a> / <a href="#shop" onclick="S.cat='${esc(p.cat)}'">${esc(p.cat)}</a> / ${esc(p.name)}</p>
+<div class="pg" style="margin-top:24px"><div>${ph("p"+p.id,p.name+", front",p.cat,p.img,"1/1")}<div class="gal">${["Back","Label","In use"].map((v,i)=>ph("p"+p.id+"bcd"[i],p.name+", "+v,p.cat,"","1/1").replace("<span>","<span>"+v+" ")).join("")}</div></div>
+<div><p class="mut">${esc(p.brand)}</p><h1 style="font-size:clamp(28px,3.5vw,40px)">${esc(p.name)}</h1><p style="margin:12px 0">${st(p)} ${mt(p)}</p><div class="pr" style="font-size:28px">${peso(p.price)} <small class="mut" style="font:400 14px var(--bt)">per ${esc(p.unit)}</small></div><p style="margin:16px 0;max-width:52ch">${esc(p.d)}</p>
+<div class="spec"><div><span>Brand</span><span>${esc(p.brand)}</span></div><div><span>Category</span><span>${esc(p.cat)}</span></div><div><span>Sold as</span><span>${esc(p.unit)}</span></div><div><span>On hand</span><span class="n">${p.stock}</span></div></div>
+<div class="row"><label for="pq" style="margin:0">Quantity</label><input class="fld" id="pq" type="number" min="1" value="1" style="width:88px" ${p.stock<=0?"disabled":""}><button class="btn p" ${p.stock<=0?"disabled":""} onclick="add(${p.id},Math.max(1,+$('#pq').value||1))">${p.stock<=0?"Unavailable":"Add to cart"}</button></div></div></div>
+${rel.length?`<h2 style="margin:96px 0 32px">Related products</h2><div class="grid">${rel.map(x=>pc(x)).join("")}</div>`:""}</div>`};
+V.categories=()=>`<div class="w" style="padding:64px 32px 96px"><h1 style="font-size:clamp(32px,4vw,40px);margin-bottom:32px">Categories</h1>${CAT.map(c=>`<a class="li" href="#shop" onclick="S.cat='${esc(c)}'"><span>${esc(c)}</span><span></span><span class="mut n">${P.filter(p=>p.cat===c).length} items</span></a>`).join("")}</div>`;
+V.announcements=()=>`<div class="w" style="padding:64px 32px 96px"><h1 style="font-size:clamp(32px,4vw,40px);margin-bottom:32px">Announcements</h1>${[...AN].sort((a,b)=>b.pin-a.pin||String(b.at).localeCompare(a.at)).map(adv).join("")||"<p>No announcements available right now.</p>"}</div>`;
+V.cart=()=>{const L=line();if(!L.length)return`<div class="w" style="padding:96px 32px"><h1 style="font-size:clamp(32px,4vw,40px)">Cart</h1><p style="margin:16px 0 24px">Your cart is empty. Pick seeds, feed or tools from the shop.</p><a class="btn p" href="#shop">Shop supplies</a></div>`;
+return`<form class="w cart" style="padding-top:64px;padding-bottom:96px" onsubmit="order(event)"><div><h1 style="font-size:clamp(32px,4vw,40px);margin-bottom:24px">Cart</h1>${L.map(c=>`<div class="ln">${ph("p"+c.p.id,c.p.name,c.p.cat,c.p.img,"1/1")}<div><h3>${esc(c.p.name)}</h3><p class="mut">${peso(c.p.price)} per ${esc(c.p.unit)}</p><button type="button" class="lk r" onclick="rm(${c.p.id})">Remove item</button></div><div><label class="mut" for="q${c.p.id}" style="margin:0">Quantity</label><input class="fld" id="q${c.p.id}" type="number" min="1" value="${c.qty}" onchange="setQ(${c.p.id},this.value)"></div></div>`).join("")}
+<h2 style="margin:48px 0 8px;font-size:24px">Delivery</h2><label for="ft">How do you want it?</label><select id="ft" name="ft" class="fld" onchange="route(1)"><option value="delivery">Delivery</option><option value="pickup" ${window._ft==="pickup"?"selected":""}>Store pickup</option></select>
+<div id="dl"><label for="mun">Municipality</label><select id="mun" name="mun" class="fld" onchange="rfee()"><option value="">Choose one</option>${Object.keys(FEE).map(m=>`<option value="${m}">${m} (${peso(FEE[m])})</option>`).join("")}</select><label for="brgy">Barangay</label><input class="fld" id="brgy" name="brgy"><label for="street">Street</label><input class="fld" id="street" name="street"><label>Pin your location</label><iframe class="map" title="Delivery map" loading="lazy" src="https://www.google.com/maps?q=${encodeURIComponent(STORE.q)}&output=embed"></iframe></div></div>
+<aside class="rcpt"><h2 style="font-size:24px;margin-bottom:16px">Order summary</h2>${L.map(c=>`<div class="t"><span>${esc(c.p.name)} × ${c.qty}</span><span class="n">${peso(c.p.price*c.qty)}</span></div>`).join("")}<div class="t"><span>Subtotal</span><span class="n">${peso(sub())}</span></div><div class="t"><span>Delivery fee</span><span class="n" id="fe">${peso(0)}</span></div><div class="t tot"><b>Total</b><span class="n" id="to">${peso(sub())}</span></div>
+<label for="pay">Payment method</label><select id="pay" name="pay" class="fld"><option>Cash on Delivery</option><option>GCash</option><option>Card</option><option>GrabPay</option></select><div style="margin-top:24px"><button class="btn p" style="width:100%">Place order</button></div><p class="err" id="oe" role="alert"></p></aside></form>`};
+function rfee(){const m=$("#mun").value,d=$("#ft").value==="delivery",fe=d?FEE[m]||0:0;$("#fe").textContent=peso(fe);$("#to").textContent=peso(sub()+fe)}
+V.about=()=>`<div class="w two" style="padding:64px 32px 96px"><div><h1 style="font-size:clamp(32px,4vw,40px);margin-bottom:24px">About AgriMart</h1><p style="max-width:52ch">We are a farm supply store for small growers, livestock raisers and backyard gardeners. Prices and stock are published here so you don’t have to travel to find out.</p></div><div><h2 style="font-size:24px;margin-bottom:16px">Hours</h2><div class="li" style="grid-template-columns:1fr auto"><span>Monday to Sunday</span><span class="n">${STORE.open}:00 am to ${STORE.close-12}:00 pm</span></div><p class="mut" style="margin-top:12px">${STORE.addr}</p></div></div>`;
+V.contact=()=>`<div class="w two" style="padding:64px 32px 96px"><div><h1 style="font-size:clamp(32px,4vw,40px);margin-bottom:24px">Contact</h1><iframe class="map" title="Store location" loading="lazy" src="https://www.google.com/maps?q=${encodeURIComponent(STORE.q)}&output=embed"></iframe><p class="mut" style="margin-top:12px">${STORE.addr}. ${isOpen()?"Open now":"Closed now"}.</p></div>
+<form onsubmit="event.preventDefault();api('/contact-messages',{method:'POST',body:JSON.stringify({data:{name:this.nm.value,email:this.em.value,message:this.ms.value}})}).catch(()=>{});this.reset();toast('Message sent')"><h2 style="font-size:24px">Send a message</h2><label for="nm">Name</label><input class="fld" id="nm" name="nm" required><label for="em">Email</label><input class="fld" id="em" name="em" type="email" required><label for="ms">Message</label><textarea class="fld" id="ms" name="ms" required></textarea><div style="margin-top:24px"><button class="btn f">Send message</button></div></form></div>`;
+V.account=()=>{if(!user)return`<div class="w" style="padding:64px 32px 96px;max-width:520px;margin:0 auto"><h1 style="font-size:clamp(32px,4vw,40px)">${authMode==="login"?"Log in":"Create account"}</h1><form onsubmit="auth(event)">${authMode==="reg"?'<label for="fn">Full name</label><input class="fld" id="fn" name="fn" required>':""}<label for="em">Email</label><input class="fld" id="em" name="em" type="email" required><label for="pw">Password</label><input class="fld" id="pw" name="pw" type="password" minlength="6" required><div style="margin-top:24px"><button class="btn p">${authMode==="login"?"Log in":"Sign up"}</button></div><p class="err" id="ae" role="alert"></p></form><p style="margin-top:16px"><button class="lk" onclick="authMode=authMode==='login'?'reg':'login';route(1)">${authMode==="login"?"Create an account":"I already have an account"}</button></p></div>`;
+setTimeout(mine,0);return`<div class="w" style="padding:64px 32px 96px"><div class="hd2"><h1 style="font-size:clamp(32px,4vw,40px)">My orders</h1><span class="mut">${esc(user.email)} <button class="lk" onclick="out()">Log out</button></span></div><div id="ol"><p class="mut">Loading orders...</p></div></div>`};
+async function mine(){const el=$("#ol");if(!el)return;try{const r=await api("/orders?sort=createdAt:desc&populate=*");const o=r.data.map(f);el.innerHTML=o.length?o.map(x=>{const i=STEPS.indexOf(x.status);return`<div class="ord"><div class="row" style="justify-content:space-between"><h3>Order ${x.id}</h3><span class="n">${peso(x.total_amount)}</span></div><p class="mut">${new Date(x.createdAt).toLocaleDateString("en")} · ${esc(x.fulfillment_type)}</p>${x.status==="Cancelled"?'<p class="pin" style="display:inline-block;margin-top:8px">Cancelled</p>':`<ol class="tl" aria-label="Status: ${esc(x.status)}">${STEPS.map((s,k)=>`<li class="${k<i?"d":k===i?"c":""}">${s}</li>`).join("")}</ol>`}</div>`}).join(""):"<p>You haven’t placed any orders yet.</p>"}catch(e){el.innerHTML=`<p class="err" role="alert">Couldn’t load your orders. <button class="lk" onclick="mine()">Try again</button></p>`}}
+async function auth(e){e.preventDefault();const g=n=>e.target.elements[n].value,reg=authMode==="reg";try{const r=await api(reg?"/auth/local/register":"/auth/local",{method:"POST",body:JSON.stringify(reg?{username:g("em"),email:g("em"),password:g("pw"),full_name:g("fn")}:{identifier:g("em"),password:g("pw")})});jwt=r.jwt;user=r.user;sv("jwt",jwt);sv("user",user);bar();toast(reg?"Account created":"Logged in");route()}catch(x){$("#ae").textContent=x.message==="Failed to fetch"?"Strapi isn’t reachable at "+API+". Start it and try again.":x.message+". Check your email and password."}}
+function out(){user=jwt=null;sv("user",null);sv("jwt",null);bar();route()}
+V.nf=()=>`<div class="w" style="padding:96px 32px"><h1>Page not found</h1><p style="margin:16px 0 24px">That page doesn’t exist. Go back to the shop to keep browsing.</p><a class="btn p" href="#shop">Shop supplies</a></div>`;
+/* router */
+const NAV=[["home","Home"],["shop","Shop"],["categories","Categories"],["announcements","Announcements"],["about","About"],["contact","Contact"]];
+function bar(){const n=cart.reduce((s,c)=>s+c.qty,0),c=$("#cc");c.hidden=!n;c.textContent=n;c.classList.remove("b");void c.offsetWidth;c.classList.add("b");$("#ac").textContent=user?"My orders":"Account"}
+function mn(){const o=$("#nv").classList.toggle("open");$("#mb").setAttribute("aria-expanded",o)}
+function go(e){e.preventDefault();S.q=$("#q").value;location.hash="#shop";route(1);return false}
+function route(keep){const[h,a]=(location.hash.slice(1)||"home").split("/"),v=V[h]||V.nf;window._ft=document.getElementById("ft")?.value;
+$("#nv").innerHTML=NAV.map(n=>`<a href="#${n[0]}" ${n[0]===h?'aria-current="page"':""}>${n[1]}</a>`).join("");$("#nv").classList.remove("open");$("#mb").setAttribute("aria-expanded","false");
+$("#app").innerHTML=v(a);if(!keep)scrollTo(0,0);if(h==="cart"){const s=$("#ft");if(s&&window._ft){s.value=window._ft}$("#dl").style.display=$("#ft").value==="pickup"?"none":"";rfee()}document.title=(h==="home"?"":h[0].toUpperCase()+h.slice(1)+" · ")+"AgriMart"}
+$("#fh").innerHTML=STORE.addr+"<br>"+(isOpen()?"Open now":"Closed now");
+addEventListener("hashchange",()=>route());
+boot().then(()=>{bar();route();setTimeout(()=>{const l=$("#ld");l.style.opacity=0;setTimeout(()=>l.remove(),300)},1700);if(!live)toast("Showing sample data. Strapi isn’t reachable.")});
+</script></body></html>

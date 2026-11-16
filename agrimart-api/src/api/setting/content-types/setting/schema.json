@@ -1,0 +1,65 @@
+{
+  "kind": "singleType",
+  "collectionName": "store_settings",
+  "info": {
+    "singularName": "setting",
+    "pluralName": "settings",
+    "displayName": "Store settings"
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "storeName": {
+      "type": "string",
+      "default": "AgriMart"
+    },
+    "tagline": {
+      "type": "string",
+      "default": "Seeds, feed, fertilizer and tools from Victoria."
+    },
+    "deliveryFees": {
+      "type": "json"
+    },
+    "defaultDeliveryFee": {
+      "type": "decimal",
+      "default": 100
+    },
+    "freeDeliveryThreshold": {
+      "type": "decimal",
+      "default": 3000
+    },
+    "defaultReorderLevel": {
+      "type": "integer",
+      "default": 10
+    },
+    "lowStockEmail": {
+      "type": "email"
+    },
+    "plusMonthly": {
+      "type": "decimal",
+      "default": 149
+    },
+    "plusYearly": {
+      "type": "decimal",
+      "default": 1490
+    },
+    "maintenanceMode": {
+      "type": "boolean",
+      "default": false
+    },
+    "announcementBar": {
+      "type": "string"
+    },
+    "supportPhone": {
+      "type": "string"
+    },
+    "supportEmail": {
+      "type": "email"
+    },
+    "pickupNote": {
+      "type": "text"
+    }
+  }
+}
